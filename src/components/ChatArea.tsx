@@ -153,39 +153,41 @@ const ChatArea = () => {
   }, [])
 
   return (
-    <ScrollArea className="relative flex h-full flex-1 flex-col justify-end bg-zinc-200 px-2 [&>[data-radix-scroll-area-viewport]>*]:h-full">
-      <div className="flex h-full flex-col justify-end">
-        <ChatAnnounce />
-        {chatData.slice(0, 7).map((chat, index) => (
-          <ChatMessage key={index} {...chat} />
-        ))}
-        <ChatExperience />
-        {chatData.slice(7, 9).map((chat, index) => (
-          <ChatMessage key={index} {...chat} />
-        ))}
-        <ChatBlocked />
-        {chatData.slice(9, 14).map((chat, index) => (
-          <ChatMessage key={index} {...chat} />
-        ))}
-        <div
-          className="pointer-events-none"
-          aria-hidden="true"
-          ref={bottomEl}
-        ></div>
-        <div className="sticky bottom-0 flex h-7 justify-center">
-          <button
-            type="button"
-            onClick={scrollToBottom}
-            className={cn(
-              "relative bottom-2 grid place-content-center rounded-full bg-blue-600 p-1 transition-opacity duration-500",
-              isBottomInView && "pointer-events-none opacity-0"
-            )}
-          >
-            <ArrowDown className="h-5 w-5 text-white" />
-          </button>
+    <>
+      <ScrollArea className="relative flex h-full flex-1 flex-col justify-end bg-zinc-200 px-2 [&>div>div]:h-full">
+        <div className="flex h-full flex-col justify-end">
+          <ChatAnnounce />
+          {chatData.slice(0, 7).map((chat, index) => (
+            <ChatMessage key={index} {...chat} />
+          ))}
+          <ChatExperience />
+          {chatData.slice(7, 9).map((chat, index) => (
+            <ChatMessage key={index} {...chat} />
+          ))}
+          <ChatBlocked />
+          {chatData.slice(9, 14).map((chat, index) => (
+            <ChatMessage key={index} {...chat} />
+          ))}
+          <div
+            className="pointer-events-none"
+            aria-hidden="true"
+            ref={bottomEl}
+          ></div>
+          <div className="sticky bottom-0 flex h-7 justify-center">
+            <button
+              type="button"
+              onClick={scrollToBottom}
+              className={cn(
+                "relative bottom-2 grid place-content-center rounded-full bg-blue-600 p-1 transition-opacity duration-500",
+                isBottomInView && "pointer-events-none opacity-0"
+              )}
+            >
+              <ArrowDown className="h-5 w-5 text-white" />
+            </button>
+          </div>
         </div>
-      </div>
-    </ScrollArea>
+      </ScrollArea>
+    </>
   )
 }
 export default ChatArea

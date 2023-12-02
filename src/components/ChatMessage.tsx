@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify"
+import { GripVertical } from "lucide-react"
 
 import { cn, getUsernameInitials } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -55,12 +56,23 @@ const ChatMessage = (props: TProps) => {
       </div>
       <div
         className={cn(
-          `chat-bubble relative col-start-2 block min-h-[2.75rem] w-fit min-w-[2.75rem] max-w-[90%] rounded-2xl bg-slate-800 px-4 py-2 text-gray-300 ${
-            isRight ? "chat-end col-start-1 rounded-ee-none" : "rounded-es-none"
+          `chat-bubble relative col-start-2 flex min-h-[2.75rem] w-fit min-w-[2.75rem] max-w-[90%] items-start gap-2 rounded-2xl bg-slate-800 px-4 py-2 text-gray-300 ${
+            isRight
+              ? "chat-end col-start-1 flex-row-reverse rounded-ee-none"
+              : "rounded-es-none"
           }`
         )}
-        dangerouslySetInnerHTML={sanitizedHTML}
-      ></div>
+      >
+        <p dangerouslySetInnerHTML={sanitizedHTML} />
+        <div
+          className={cn(
+            "relative -right-2 -top-0.5 shrink-0 rounded-full bg-white/20 p-1",
+            isRight ? "-left-2" : ""
+          )}
+        >
+          <GripVertical className="h-2.5 w-2.5" />
+        </div>
+      </div>
       <div
         className={cn(
           `col-start-2 row-start-3 text-sm opacity-50 ${
