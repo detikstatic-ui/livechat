@@ -11,21 +11,19 @@ import ChatLinkPreview from "./ChatLinkPreview"
 import ChatMessage from "./ChatMessage"
 import ChatSwiper from "./ChatSwiper"
 
+// import ChatSwiper from "./ChatSwiper"
+
 const chatData = [
   {
     userName: "Anakin",
     message: "What kind of nonsense is this",
     time: "12:46",
-    status: "Seen at 12:46",
-    isRight: true,
     avatar: "/images/anakin-avatar.jpg",
   },
   {
     userName: "Anakin",
     message: "Put me on the Council and not make me a Master!??",
     time: "12:46",
-    status: "Seen at 12:46",
-    isRight: true,
     avatar: "/images/anakin-avatar.jpg",
   },
   {
@@ -33,15 +31,12 @@ const chatData = [
     message:
       "That's never been done in the history of the Jedi. It's insulting!",
     time: "12:46",
-    status: "Seen at 12:46",
-    isRight: true,
     avatar: "/images/anakin-avatar.jpg",
   },
   {
     userName: "Obi-Wan Kenobi",
     message: "Calm down, Anakin.",
     time: "12:45",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
@@ -49,7 +44,6 @@ const chatData = [
     userName: "Obi-Wan Kenobi",
     message: "You have been given a great honor.",
     time: "12:45",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
@@ -57,7 +51,6 @@ const chatData = [
     userName: "Obi-Wan Kenobi",
     message: "To be on the Council at your age.",
     time: "12:45",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
@@ -65,15 +58,13 @@ const chatData = [
     userName: "Obi-Wan Kenobi",
     message: "It's never happened before.",
     time: "12:45",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
   {
     userName: "Obi-Wan Kenobi",
-    message: "It's over Anakin,<br />I have the high ground.",
+    message: "It's over Anakin, I have the high ground.",
     time: "12:45",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
@@ -81,15 +72,12 @@ const chatData = [
     userName: "Anakin",
     message: "You underestimate my power!",
     time: "12:46",
-    status: "Seen at 12:46",
-    isRight: true,
     avatar: "/images/anakin-avatar.jpg",
   },
   {
     userName: "Obi-Wan Kenobi",
     message: "It was said that you would, destroy the Sith, not join them.",
     time: "12:47",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
@@ -97,7 +85,6 @@ const chatData = [
     userName: "Obi-Wan Kenobi",
     message: "It was you who would bring balance to the Force",
     time: "12:47",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
@@ -105,7 +92,6 @@ const chatData = [
     userName: "Obi-Wan Kenobi",
     message: "Not leave it in Darkness",
     time: "12:47",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
@@ -113,7 +99,6 @@ const chatData = [
     userName: "Obi-Wan Kenobi",
     message: "You were the Chosen One!",
     time: "12:47",
-    status: "Delivered",
     isRight: false,
     avatar: "/images/obiwan-avatar.png",
   },
@@ -121,8 +106,6 @@ const chatData = [
     userName: "Anakin",
     message: "I hate you!",
     time: "12:48",
-    status: "Seen at 12:46",
-    isRight: true,
     avatar: "/images/anakin-avatar.jpg",
   },
 ]
@@ -156,9 +139,8 @@ const ChatArea = () => {
 
   return (
     <>
-      <ScrollArea className="relative flex h-full flex-1 flex-col justify-end bg-zinc-200 px-2 [&>div>div]:h-full">
+      <ScrollArea className="relative flex h-full flex-1 flex-col justify-end bg-white [&>div>div]:h-full">
         <div className="isolate flex h-full flex-col justify-end">
-          <ChatAnnounce />
           {chatData.slice(0, 7).map((chat, index) => (
             <ChatMessage key={index} {...chat} />
           ))}
@@ -166,27 +148,26 @@ const ChatArea = () => {
           {chatData.slice(7, 9).map((chat, index) => (
             <ChatMessage key={index} {...chat} />
           ))}
-          <ChatBlocked />
+          <ChatAnnounce />
           {chatData.slice(9, 14).map((chat, index) => (
             <ChatMessage key={index} {...chat} />
           ))}
+          <ChatBlocked />
           <ChatMessage
             userName="Moderator"
             message="Artikel Terkait Moto GP"
             time="12:48"
-            status="Seen at 12:46"
-            isRight={true}
             avatar="/images/leia.jpeg"
+            isAdmin={true}
           >
             <ChatSwiper />
           </ChatMessage>
           <ChatMessage
             userName="Luke Skywalker"
             message={`lorem ipsum dolor sit amet consectetur adipisicing elit.`}
-            chatBubbleStyles={`bg-blue-500`}
             time="12:48"
-            status="Seen at 12:49"
             avatar="/images/luke.jpeg"
+            isAdmin={true}
           ></ChatMessage>
           <ChatMessage
             userName="Moderator"
@@ -194,9 +175,8 @@ const ChatArea = () => {
               <a href="#">https://sport.detik.com/moto-gp/d-7065304/bagnaia-puas-dengan-motor-baru-ducati-tapi-bisa-lebih-oke-lagi</a>
               Terima kasih semuanya`}
             time="12:48"
-            status="Seen at 12:46"
-            isRight={true}
             avatar="/images/leia.jpeg"
+            isAdmin={true}
           >
             <ChatLinkPreview />
           </ChatMessage>

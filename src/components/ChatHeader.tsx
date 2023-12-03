@@ -12,7 +12,7 @@ const ChatHeader = (props: TProps) => {
   const { showUsers, setShowUsers } = props
 
   return (
-    <div className="z-20 flex h-9 shrink-0 items-center border-b border-neutral-200 bg-stone-50 px-2.5">
+    <div className="z-20 flex h-9 shrink-0 items-center border-b border-neutral-200 bg-white px-2.5">
       {!showUsers ? (
         <button
           type="button"

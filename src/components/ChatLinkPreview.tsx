@@ -17,19 +17,18 @@ const ChatLinkPreview = () => {
   return (
     <a
       href="#"
-      className="order-first grid grid-cols-[60px_1fr] items-start gap-2 rounded-sm bg-white/10 p-2 no-underline"
+      className="mx-0 grid w-full grid-cols-[60px_1fr] items-start gap-x-2 gap-y-1 rounded-sm bg-zinc-200 p-2 no-underline"
       data-chat-link-preview
+      style={{ margin: "8px 0 0 0" }}
     >
       <img
         src={chatData.images[0]}
-        className="aspect-square h-16 w-16 rounded-sm object-cover"
+        className="row-span-2 aspect-square h-16 w-16 rounded-sm object-cover"
         alt={chatData.title}
       />
 
       <div className="line-clamp-3  text-xs font-bold">{chatData.title}</div>
-      <div className="col-span-full line-clamp-5 text-xs">
-        {chatData.description}
-      </div>
+      <div className="line-clamp-5 text-xs">{chatData.description}</div>
     </a>
   )
 }

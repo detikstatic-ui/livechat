@@ -6,7 +6,7 @@ import ChatPinnedSwiper from "./ChatPinnedSwiper"
 const ChatPinned = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
   return (
-    <div className="flex flex-col gap-2 border-b border-neutral-200 bg-amber-50 p-2.5 text-neutral-500">
+    <div className="flex flex-col gap-2 border-b bg-[#203d6b] p-2.5 text-white">
       <div className="flex items-center gap-2.5 text-xs font-bold">
         <Pin className="h-4 w-4 -rotate-45" />
         Pinned Chat
@@ -14,7 +14,7 @@ const ChatPinned = () => {
           BARU
         </span>
         <button
-          className="ml-auto text-xxs font-bold leading-3 text-[#465fa8]"
+          className="ml-auto text-xxs font-bold leading-3 text-white"
           type="button"
           onClick={() => setIsExpanded(!isExpanded)}
         >

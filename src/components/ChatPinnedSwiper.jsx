@@ -63,7 +63,7 @@ const ChatPinnedSwiper = () => {
         <swiper-slide key={index} style={{ padding: "0px 26px 24px" }}>
           <div className="flex flex-col gap-1 text-xs">
             <div className="font-bold">{msg.author}</div>
-            <p className="text-gray-500">{msg.msg}</p>
+            <p className="text-white">{msg.msg}</p>
           </div>
         </swiper-slide>
       ))}

@@ -1,10 +1,11 @@
 import DOMPurify from "dompurify"
-import { GripVertical } from "lucide-react"
+import { Check } from "lucide-react"
 
 import { cn, getUsernameInitials } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import ChatAction from "./ChatAction"
+import { Icons } from "./Icons"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,8 +18,7 @@ type TProps = {
   isRight?: boolean
   userName?: string
   time?: string
-  status?: string
-  chatBubbleStyles?: string
+  isAdmin?: boolean
   children?: React.ReactNode
 }
 
@@ -29,8 +29,7 @@ const ChatMessage = (props: TProps) => {
     isRight = false,
     userName = "Obi-Wan Kenobi",
     time = "12:45",
-    status = "Delivered",
-    chatBubbleStyles,
+    isAdmin = false,
     children,
   } = props
 
@@ -41,68 +40,56 @@ const ChatMessage = (props: TProps) => {
   return (
     <div
       className={cn(
-        "grid grid-cols-[auto_1fr] place-items-start gap-x-3 py-1",
-        isRight && "grid-cols-[1fr_auto] place-items-end"
+        "group flex w-full min-w-0 items-start gap-x-4 px-6 py-1 hocus:bg-black/5",
+        isRight ? "flex-row-reverse" : "flex-row"
       )}
     >
-      <Avatar
-        className={cn(
-          `relative col-start-1 row-span-2 inline-flex w-10 self-end ${
-            isRight ? "col-start-2" : ""
-          }`
-        )}
-      >
+      <Avatar className={cn(`relative flex h-6 w-6`)}>
         <AvatarImage src={avatar} className="object-cover" />
         <AvatarFallback>{getUsernameInitials(userName)}</AvatarFallback>
       </Avatar>
       <div
         className={cn(
-          `col-start-2 row-start-1 flex items-center gap-1 text-sm ${
-            isRight ? "col-start-1" : ""
-          }`
+          "grow space-x-2 text-[13px] leading-5",
+          isRight ? "text-right" : ""
         )}
+        style={{ wordBreak: "break-word" }}
       >
-        {userName}
-        <time className="text-xs opacity-50">{time}</time>
-      </div>
-      <div
-        className={cn(
-          `chat-bubble relative col-start-2 flex min-h-[2.75rem] w-fit min-w-[2.75rem] max-w-[90%] flex-col items-start gap-2 rounded-2xl bg-slate-800 px-4 py-2 text-sm text-gray-300 ${
-            isRight ? "chat-end col-start-1 rounded-ee-none" : "rounded-es-none"
-          } ${chatBubbleStyles}`
-        )}
-      >
+        <time className="inline text-xs text-neutral-900/40">{time}</time>
+        <span
+          className={cn(
+            "inline font-semibold text-neutral-900",
+            isAdmin ? "rounded-sm bg-yellow-400 px-1 py-0.5" : ""
+          )}
+        >
+          {userName} {isAdmin ? <Check className="inline w-4" /> : ""}
+        </span>
         <p
-          className="[&>a]:underline"
+          className="inline text-stone-950 [&>a]:underline"
           dangerouslySetInnerHTML={sanitizedHTML}
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button
-              className={cn(
-                "absolute -top-0.5 left-full right-auto shrink-0 rounded-full bg-black/70 p-1",
-                isRight ? "left-auto right-full" : ""
-              )}
-              type="button"
-            >
-              <GripVertical className="h-2.5 w-2.5" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent asChild>
-            <ChatAction />
-          </DropdownMenuContent>
-        </DropdownMenu>
-        {children}
+        <div
+          className="grid w-full min-w-0 grid-cols-1"
+          style={{ margin: "8px 0 0" }}
+        >
+          {children}
+        </div>
       </div>
-      <div
-        className={cn(
-          `col-start-2 row-start-3 text-sm opacity-50 ${
-            isRight ? "col-start-1" : ""
-          }`
-        )}
-      >
-        {status}
-      </div>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            className={cn(
+              "shrink-0 rounded-full p-1 outline outline-1 outline-transparent transition-all duration-300 hover:outline-black/20 "
+            )}
+            type="button"
+          >
+            <Icons.dots className="pointer-events-none" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent asChild>
+          <ChatAction />
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   )
 }

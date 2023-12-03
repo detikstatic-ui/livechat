@@ -6,7 +6,7 @@ const ChatAction = () => {
   const btnClassName = "flex items-center gap-1.5"
 
   return (
-    <div className="flex flex-col gap-1 rounded-sm bg-white px-5 py-2.5 text-sm font-bold text-gray-500 shadow-sm">
+    <div className="flex flex-col gap-1 rounded-sm border border-black/5 bg-white px-5 py-2.5 text-sm text-gray-500 shadow-md">
       <button type="button" className={btnClassName}>
         <Reply strokeWidth={3} className="h-4 w-4" /> Reply
       </button>
