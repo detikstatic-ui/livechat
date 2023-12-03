@@ -7,7 +7,9 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import ChatAnnounce from "./ChatAnnounce"
 import ChatBlocked from "./ChatBlocked"
 import ChatExperience from "./ChatExperience"
+import ChatLinkPreview from "./ChatLinkPreview"
 import ChatMessage from "./ChatMessage"
+import ChatSwiper from "./ChatSwiper"
 
 const chatData = [
   {
@@ -155,7 +157,7 @@ const ChatArea = () => {
   return (
     <>
       <ScrollArea className="relative flex h-full flex-1 flex-col justify-end bg-zinc-200 px-2 [&>div>div]:h-full">
-        <div className="flex h-full flex-col justify-end">
+        <div className="isolate flex h-full flex-col justify-end">
           <ChatAnnounce />
           {chatData.slice(0, 7).map((chat, index) => (
             <ChatMessage key={index} {...chat} />
@@ -168,17 +170,47 @@ const ChatArea = () => {
           {chatData.slice(9, 14).map((chat, index) => (
             <ChatMessage key={index} {...chat} />
           ))}
+          <ChatMessage
+            userName="Moderator"
+            message="Artikel Terkait Moto GP"
+            time="12:48"
+            status="Seen at 12:46"
+            isRight={true}
+            avatar="/images/leia.jpeg"
+          >
+            <ChatSwiper />
+          </ChatMessage>
+          <ChatMessage
+            userName="Luke Skywalker"
+            message={`lorem ipsum dolor sit amet consectetur adipisicing elit.`}
+            chatBubbleStyles={`bg-blue-500`}
+            time="12:48"
+            status="Seen at 12:49"
+            avatar="/images/luke.jpeg"
+          ></ChatMessage>
+          <ChatMessage
+            userName="Moderator"
+            message={`Untuk informasi detailnya bisa dilihat di link berikut ya:
+              <a href="#">https://sport.detik.com/moto-gp/d-7065304/bagnaia-puas-dengan-motor-baru-ducati-tapi-bisa-lebih-oke-lagi</a>
+              Terima kasih semuanya`}
+            time="12:48"
+            status="Seen at 12:46"
+            isRight={true}
+            avatar="/images/leia.jpeg"
+          >
+            <ChatLinkPreview />
+          </ChatMessage>
           <div
             className="pointer-events-none"
             aria-hidden="true"
             ref={bottomEl}
           ></div>
-          <div className="sticky bottom-0 flex h-7 justify-center">
+          <div className="pointer-events-none sticky bottom-0 flex h-7 justify-center">
             <button
               type="button"
               onClick={scrollToBottom}
               className={cn(
-                "relative bottom-2 grid place-content-center rounded-full bg-blue-600 p-1 transition-opacity duration-500",
+                "pointer-events-auto relative bottom-2 grid place-content-center rounded-full bg-blue-600 p-1 transition-opacity duration-500",
                 isBottomInView && "pointer-events-none opacity-0"
               )}
             >

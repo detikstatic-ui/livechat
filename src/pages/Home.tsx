@@ -22,7 +22,7 @@ const Home = () => {
         )}
       >
         <ChatHeader showUsers={showUsers} setShowUsers={setShowUsers} />
-        <div className="relative isolate flex h-full min-h-0 flex-col overflow-hidden">
+        <div className="relative isolate z-0 flex h-full min-h-0 flex-col overflow-hidden">
           <ChatPinned />
           <ChatArea />
           {showUsers && <ChatUsers />}
