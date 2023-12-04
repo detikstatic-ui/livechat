@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react-swc"
 import { defineConfig } from "vite"
 
 // https://vitejs.dev/config/
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [react()],
@@ -14,9 +15,9 @@ export default defineConfig(({ command }) => {
     },
   }
 
-  if (command !== "serve") {
-    config.base = "/react-vite-gh-pages/"
-  }
+  // if (command !== "serve") {
+  //   config.base = "/react-vite-gh-pages/"
+  // }
 
   return config
 })
