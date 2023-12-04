@@ -1,10 +1,17 @@
 import { useState } from "react"
-import { Pin } from "lucide-react"
+import { Ban, Pin, XCircle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
 import ChatMessage from "./ChatMessage"
 import { Icons } from "./Icons"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu"
 
 type TProps = {
   className?: string
@@ -12,10 +19,12 @@ type TProps = {
 
 const ChatPinned = ({ className }: TProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
+  const [isShow, setIsShow] = useState<boolean>(true)
   return (
     <div
       className={cn(
-        "relative flex flex-col gap-2 bg-[#203d6b] p-2.5 text-white",
+        "relative flex cursor-pointer flex-col gap-2 bg-[#203d6b] p-2.5 text-white",
+        isShow ? "" : "hidden",
         className
       )}
       onClick={() => setIsExpanded(!isExpanded)}
@@ -42,14 +51,48 @@ const ChatPinned = ({ className }: TProps) => {
         hasAction={false}
         isAdmin={true}
       />
-      <button
-        type="button"
-        className={cn(
-          "absolute right-1 top-1.5 z-10 grid h-7 w-7 place-content-center rounded-full transition-colors duration-300 hover:bg-white/10"
-        )}
-      >
-        <Icons.dotsBold className="pointer-events-none" />
-      </button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            type="button"
+            className={cn(
+              "absolute right-1 top-1.5 z-10 grid h-7 w-7 place-content-center rounded-full transition-colors duration-300 hover:bg-white/10"
+            )}
+          >
+            <Icons.dotsBold className="pointer-events-none" />
+          </button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem asChild>
+            <button
+              type="button"
+              className="flex w-full cursor-pointer gap-2.5"
+            >
+              <Icons.flag className="h-3 w-3" />
+              Report
+            </button>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <button
+              type="button"
+              className="flex w-full cursor-pointer gap-2.5"
+            >
+              <Ban className="h-3.5 w-3.5" strokeWidth={3} />
+              Block
+            </button>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem asChild>
+            <button
+              type="button"
+              className="flex w-full cursor-pointer gap-2.5"
+              onClick={() => setIsShow(!isShow)}
+            >
+              <XCircle className="h-4 w-4" /> Dismiss pinned message
+            </button>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   )
 }
