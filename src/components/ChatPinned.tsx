@@ -41,7 +41,7 @@ const ChatPinned = ({ className }: TProps) => {
       <ChatMessage
         className="py-0 pl-0 pr-6"
         msgClassName="text-white line-clamp-1"
-        timeClassName="text-slate-500"
+        timeClassName="text-gray-400"
         contentClassName={isExpanded ? "line-clamp-none" : "line-clamp-1"}
         time="9:26 AM"
         userName="Master Yoda"
