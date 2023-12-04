@@ -1,7 +1,17 @@
+import useStore from "@/context/useStore"
 import { participants } from "@/data/const"
 import { ArrowLeft } from "lucide-react"
 
+import { cn } from "@/lib/utils"
+import { Switch } from "@/components/ui/switch"
+
 import { Icons } from "./Icons"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu"
 
 type TProps = {
   showUsers: boolean
@@ -9,28 +19,68 @@ type TProps = {
 }
 
 const ChatHeader = (props: TProps) => {
+  const { show: showTime, toggle: timeToogle } = useStore()
   const { showUsers, setShowUsers } = props
 
   return (
     <div className="z-20 flex h-9 shrink-0 items-center border-b border-neutral-200 bg-white px-2.5">
       {!showUsers ? (
-        <button
-          type="button"
-          className="flex items-center gap-1 text-xs font-semibold text-neutral-500"
-          onClick={() => setShowUsers(!showUsers)}
-        >
-          <Icons.users className="h-4 w-4" />
-          100 Online
-          <span className="block h-1.5 w-1.5 animate-pulse rounded-full bg-green-500"></span>
-        </button>
+        <>
+          <div className="flex items-center gap-1 text-xs font-semibold text-stone-950">
+            <Icons.users className="h-4 w-4" />
+            100 Online
+            <span className="block h-1.5 w-1.5 animate-pulse rounded-full bg-green-500"></span>
+          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                className={cn(
+                  "ml-auto grid h-7 w-7 place-content-center rounded-full transition-colors duration-300 hover:bg-black/10 focus-visible:outline-black/10"
+                )}
+              >
+                <Icons.dotsBold className="pointer-events-none" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem asChild>
+                <button
+                  type="button"
+                  className="flex w-full cursor-pointer items-center gap-2"
+                  onClick={() => setShowUsers(!showUsers)}
+                >
+                  <Icons.user className="h-5 w-5" />
+                  Participants
+                </button>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <button
+                  type="button"
+                  className="flex w-full cursor-pointer items-center gap-2"
+                  onClick={timeToogle}
+                >
+                  <Icons.time className="h-5 w-5" />
+                  <label htmlFor="timestamps" className="pointer-events-none">
+                    Timestamps
+                  </label>
+                  <Switch
+                    id="timestamps"
+                    className="pointer-events-none"
+                    checked={showTime}
+                  />
+                </button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </>
       ) : (
-        <div className="flex w-full items-center justify-between text-xs font-semibold text-neutral-500">
+        <div className="flex w-full items-center justify-between text-xs font-semibold text-stone-950">
           <button
             className="flex items-center gap-2"
             type="button"
             onClick={() => setShowUsers(!showUsers)}
           >
-            <span className="grid h-6 w-6 place-content-center rounded-full bg-gray-500">
+            <span className="grid h-6 w-6 place-content-center rounded-full bg-stone-950">
               <ArrowLeft className="h-4 w-4 text-white" />
             </span>
             Participants

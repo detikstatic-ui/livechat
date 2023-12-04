@@ -138,68 +138,66 @@ const ChatArea = () => {
   }, [])
 
   return (
-    <>
-      <ScrollArea className="relative flex h-full flex-1 flex-col justify-end bg-white [&>div>div]:h-full">
-        <div className="isolate flex h-full flex-col justify-end">
-          {chatData.slice(0, 7).map((chat, index) => (
-            <ChatMessage key={index} {...chat} />
-          ))}
-          <ChatExperience />
-          {chatData.slice(7, 9).map((chat, index) => (
-            <ChatMessage key={index} {...chat} />
-          ))}
-          <ChatAnnounce />
-          {chatData.slice(9, 14).map((chat, index) => (
-            <ChatMessage key={index} {...chat} />
-          ))}
-          <ChatBlocked />
-          <ChatMessage
-            userName="Moderator"
-            message="Artikel Terkait Moto GP"
-            time="12:48"
-            avatar="/images/leia.jpeg"
-            isAdmin={true}
-          >
-            <ChatSwiper />
-          </ChatMessage>
-          <ChatMessage
-            userName="Luke Skywalker"
-            message={`lorem ipsum dolor sit amet consectetur adipisicing elit.`}
-            time="12:48"
-            avatar="/images/luke.jpeg"
-            isAdmin={true}
-          ></ChatMessage>
-          <ChatMessage
-            userName="Moderator"
-            message={`Untuk informasi detailnya bisa dilihat di link berikut ya:
+    <ScrollArea className="relative flex h-full flex-1 flex-col justify-end bg-white [&>div>div]:h-full">
+      <div className="isolate flex h-full flex-col justify-end">
+        {chatData.slice(0, 7).map((chat, index) => (
+          <ChatMessage key={index} {...chat} />
+        ))}
+        <ChatExperience />
+        {chatData.slice(7, 9).map((chat, index) => (
+          <ChatMessage key={index} {...chat} />
+        ))}
+        <ChatAnnounce />
+        {chatData.slice(9, 14).map((chat, index) => (
+          <ChatMessage key={index} {...chat} />
+        ))}
+        <ChatBlocked />
+        <ChatMessage
+          userName="Moderator"
+          message="Artikel Terkait Moto GP"
+          time="12:48"
+          avatar="/images/leia.jpeg"
+          isAdmin={true}
+        >
+          <ChatSwiper />
+        </ChatMessage>
+        <ChatMessage
+          userName="Luke Skywalker"
+          message={`lorem ipsum dolor sit amet consectetur adipisicing elit.`}
+          time="12:48"
+          avatar="/images/luke.jpeg"
+          isAdmin={true}
+        ></ChatMessage>
+        <ChatMessage
+          userName="Moderator"
+          message={`Untuk informasi detailnya bisa dilihat di link berikut ya:
               <a href="#">https://sport.detik.com/moto-gp/d-7065304/bagnaia-puas-dengan-motor-baru-ducati-tapi-bisa-lebih-oke-lagi</a>
               Terima kasih semuanya`}
-            time="12:48"
-            avatar="/images/leia.jpeg"
-            isAdmin={true}
+          time="12:48"
+          avatar="/images/leia.jpeg"
+          isAdmin={true}
+        >
+          <ChatLinkPreview />
+        </ChatMessage>
+        <div
+          className="pointer-events-none"
+          aria-hidden="true"
+          ref={bottomEl}
+        ></div>
+        <div className="pointer-events-none sticky bottom-0 flex h-7 justify-center">
+          <button
+            type="button"
+            onClick={scrollToBottom}
+            className={cn(
+              "pointer-events-auto relative bottom-2 grid place-content-center rounded-full bg-blue-600 p-1 transition-opacity duration-500",
+              isBottomInView && "pointer-events-none opacity-0"
+            )}
           >
-            <ChatLinkPreview />
-          </ChatMessage>
-          <div
-            className="pointer-events-none"
-            aria-hidden="true"
-            ref={bottomEl}
-          ></div>
-          <div className="pointer-events-none sticky bottom-0 flex h-7 justify-center">
-            <button
-              type="button"
-              onClick={scrollToBottom}
-              className={cn(
-                "pointer-events-auto relative bottom-2 grid place-content-center rounded-full bg-blue-600 p-1 transition-opacity duration-500",
-                isBottomInView && "pointer-events-none opacity-0"
-              )}
-            >
-              <ArrowDown className="h-5 w-5 text-white" />
-            </button>
-          </div>
+            <ArrowDown className="h-5 w-5 text-white" />
+          </button>
         </div>
-      </ScrollArea>
-    </>
+      </div>
+    </ScrollArea>
   )
 }
 export default ChatArea

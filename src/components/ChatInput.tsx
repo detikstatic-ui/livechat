@@ -2,6 +2,9 @@ import { useRef, useState } from "react"
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react"
 
 import { useAutosizeTextArea } from "@/lib/hooks"
+import { cn, getUsernameInitials } from "@/lib/utils"
+
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 const ChatInput = () => {
   const [showPicker, setShowPicker] = useState(false)
@@ -15,21 +18,49 @@ const ChatInput = () => {
     setShowPicker(false)
   }
 
+  const maxChar = 200
+
   return (
     <>
-      <form className="relative">
+      <form className="relative px-6 py-3">
         {showPicker && (
           <div className="absolute bottom-full left-2 max-w-full">
             <EmojiPicker onEmojiClick={onEmojiClick} />
           </div>
         )}
-        <label htmlFor="chat" className="sr-only">
-          Your message
-        </label>
-        <div className="relative flex items-center rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-700">
+        <div className="flex items-start gap-4">
+          <Avatar className={cn(`relative mt-0.5 flex h-6 w-6 shrink-0`)}>
+            <AvatarImage
+              src={"/images/anakin-avatar.jpg"}
+              className="object-cover"
+            />
+            <AvatarFallback>{getUsernameInitials("Anakin")}</AvatarFallback>
+          </Avatar>
+          <div className="relative flex grow flex-col items-center">
+            <label
+              htmlFor="chat"
+              className="self-start text-sm font-medium text-black/60"
+            >
+              Anakin
+            </label>
+            <textarea
+              id="chat"
+              rows={1}
+              maxLength={maxChar}
+              className="peer block max-h-48 w-full resize-none border-none bg-white px-0 pb-0 pt-1 text-sm text-gray-900"
+              placeholder="Your message..."
+              ref={textAreaRef}
+              value={message}
+              onChange={(e) => setMessage(e.target.value.slice(0, maxChar))}
+              style={{ boxShadow: "none" }}
+            ></textarea>
+            <hr className="w-full border-t transition-all peer-focus:border-blue-500" />
+          </div>
+        </div>
+        <div className="mt-3 flex items-center gap-4">
           <button
             type="button"
-            className="cursor-pointer rounded-lg p-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="cursor-pointer rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
             onClick={() => setShowPicker((val) => !val)}
           >
             <svg
@@ -49,18 +80,12 @@ const ChatInput = () => {
             </svg>
             <span className="sr-only">Add emoji</span>
           </button>
-          <textarea
-            id="chat"
-            rows={1}
-            className="mx-4 block max-h-48 w-full resize-none rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            placeholder="Your message..."
-            ref={textAreaRef}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          ></textarea>
+          <p className="ml-auto text-xs tracking-wide text-gray-500">
+            {message.length}/{maxChar}
+          </p>
           <button
             type="submit"
-            className="inline-flex cursor-pointer justify-center rounded-full p-2 text-blue-600 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+            className="flex cursor-pointer justify-center rounded-full text-blue-600 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
           >
             <svg
               className="h-5 w-5 rotate-90 text-inherit rtl:-rotate-90"

@@ -1,3 +1,4 @@
+import useStore from "@/context/useStore"
 import DOMPurify from "dompurify"
 import { Check } from "lucide-react"
 
@@ -19,10 +20,16 @@ type TProps = {
   userName?: string
   time?: string
   isAdmin?: boolean
+  className?: string
+  timeClassName?: string
+  msgClassName?: string
+  contentClassName?: string
+  hasAction?: boolean
   children?: React.ReactNode
 }
 
 const ChatMessage = (props: TProps) => {
+  const { show: showTime } = useStore()
   const {
     avatar = "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
     message = "You were the Chosen One!",
@@ -30,6 +37,11 @@ const ChatMessage = (props: TProps) => {
     userName = "Obi-Wan Kenobi",
     time = "12:45",
     isAdmin = false,
+    className,
+    timeClassName,
+    msgClassName,
+    contentClassName,
+    hasAction = true,
     children,
   } = props
 
@@ -40,8 +52,9 @@ const ChatMessage = (props: TProps) => {
   return (
     <div
       className={cn(
-        "group flex w-full min-w-0 items-start gap-x-4 px-6 py-1 hocus:bg-black/5",
-        isRight ? "flex-row-reverse" : "flex-row"
+        "group relative flex w-full min-w-0 items-start gap-x-4 py-1 pl-6 pr-9 hocus:bg-black/5",
+        isRight ? "flex-row-reverse" : "flex-row",
+        className
       )}
     >
       <Avatar className={cn(`relative flex h-6 w-6`)}>
@@ -51,11 +64,18 @@ const ChatMessage = (props: TProps) => {
       <div
         className={cn(
           "grow space-x-2 text-[13px] leading-5",
-          isRight ? "text-right" : ""
+          isRight ? "text-right" : "",
+          contentClassName
         )}
         style={{ wordBreak: "break-word" }}
       >
-        <time className="inline text-xs text-neutral-900/40">{time}</time>
+        {showTime && (
+          <time
+            className={cn("inline text-xs text-neutral-900/40", timeClassName)}
+          >
+            {time}
+          </time>
+        )}
         <span
           className={cn(
             "inline font-semibold text-neutral-900",
@@ -65,7 +85,7 @@ const ChatMessage = (props: TProps) => {
           {userName} {isAdmin ? <Check className="inline w-4" /> : ""}
         </span>
         <p
-          className="inline text-stone-950 [&>a]:underline"
+          className={cn("inline text-stone-950 [&>a]:underline", msgClassName)}
           dangerouslySetInnerHTML={sanitizedHTML}
         />
         <div
@@ -75,21 +95,23 @@ const ChatMessage = (props: TProps) => {
           {children}
         </div>
       </div>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button
-            className={cn(
-              "shrink-0 rounded-full p-1 outline outline-1 outline-transparent transition-all duration-300 hover:outline-black/20 "
-            )}
-            type="button"
-          >
-            <Icons.dots className="pointer-events-none" />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent asChild>
-          <ChatAction />
-        </DropdownMenuContent>
-      </DropdownMenu>
+      {hasAction && (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              className={cn(
+                "absolute right-2 top-0.5 shrink-0 rounded-full p-1 outline outline-1 outline-transparent transition-all duration-300 hover:outline-black/20 "
+              )}
+              type="button"
+            >
+              <Icons.dots className="pointer-events-none" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent asChild>
+            <ChatAction />
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
     </div>
   )
 }

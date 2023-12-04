@@ -19,7 +19,7 @@ const ChatLinkPreview = () => {
       href="#"
       className="mx-0 grid w-full grid-cols-[60px_1fr] items-start gap-x-2 gap-y-1 rounded-sm bg-zinc-200 p-2 no-underline"
       data-chat-link-preview
-      style={{ margin: "8px 0 0 0" }}
+      style={{ margin: "0px" }}
     >
       <img
         src={chatData.images[0]}
