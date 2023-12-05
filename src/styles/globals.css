@@ -87,6 +87,5 @@
 }
 .mentions__highlighter,
 .mentions__input {
-  @apply break-words;
   word-break: break-word;
 }

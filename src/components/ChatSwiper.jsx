@@ -70,7 +70,11 @@ const ChatPinnedSwiper = () => {
   }, [])
 
   return (
-    <swiper-container ref={swiperElRef} init={false} style={{ width: "100%" }}>
+    <swiper-container
+      ref={swiperElRef}
+      init={false}
+      style={{ width: "100%", isolation: "isolate" }}
+    >
       {swiperMsg.map((msg, index) => (
         <swiper-slide key={index} style={{ padding: "0px 0px 24px" }}>
           <div className="flex flex-col gap-1 text-xs">

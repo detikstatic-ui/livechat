@@ -34,12 +34,12 @@ const ChatTextArea = ({ msg, setMsg, maxChar = 200 }) => {
       highlighter: {
         padding: 0,
         border: "1px solid transparent",
-        maxHeight: "12rem",
+        maxHeight: "8rem",
       },
       input: {
         padding: 0,
         border: "1px solid transparent",
-        maxHeight: "12rem",
+        maxHeight: "8rem",
       },
     },
 

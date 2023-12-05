@@ -184,7 +184,7 @@ const ChatArea = () => {
           aria-hidden="true"
           ref={bottomEl}
         ></div>
-        <div className="pointer-events-none sticky bottom-0 flex h-7 justify-center">
+        <div className="pointer-events-none sticky bottom-0 z-10 flex h-7 justify-center">
           <button
             type="button"
             onClick={scrollToBottom}

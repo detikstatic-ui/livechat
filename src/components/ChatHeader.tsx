@@ -23,12 +23,12 @@ const ChatHeader = (props: TProps) => {
   const { showUsers, setShowUsers } = props
 
   return (
-    <div className="z-20 flex h-9 shrink-0 items-center border-b border-neutral-200 bg-white px-2.5">
+    <div className="z-20 flex shrink-0 items-center border-b border-neutral-200 bg-white px-2.5 py-2">
       {!showUsers ? (
         <>
           <div className="flex items-center gap-1 text-xs font-semibold text-stone-950">
             <Icons.users className="h-4 w-4" />
-            100 Online
+            {participants.length} Online
             <span className="block h-1.5 w-1.5 animate-pulse rounded-full bg-green-500"></span>
           </div>
           <DropdownMenu>
@@ -53,28 +53,24 @@ const ChatHeader = (props: TProps) => {
                   Participants
                 </button>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <button
-                  type="button"
-                  className="flex w-full cursor-pointer items-center gap-2"
-                  onClick={timeToogle}
-                >
+              <DropdownMenuItem onClick={timeToogle} asChild>
+                <div className="flex w-full cursor-pointer items-center gap-2">
                   <Icons.time className="h-5 w-5" />
                   <label htmlFor="timestamps" className="pointer-events-none">
                     Timestamps
                   </label>
                   <Switch
                     id="timestamps"
-                    className="pointer-events-none"
+                    className="pointer-events-none shrink-0"
                     checked={showTime}
                   />
-                </button>
+                </div>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </>
       ) : (
-        <div className="flex w-full items-center justify-between text-xs font-semibold text-stone-950">
+        <div className="flex w-full items-center justify-between py-0.5 text-xs font-semibold text-stone-950">
           <button
             className="flex items-center gap-2"
             type="button"

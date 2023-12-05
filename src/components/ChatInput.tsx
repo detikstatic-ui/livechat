@@ -19,7 +19,7 @@ const ChatInput = () => {
 
   return (
     <>
-      <form className="relative px-6 py-3">
+      <form className="relative border-t border-black/10 px-6 py-3">
         {showPicker && (
           <div className="absolute bottom-full left-2 max-w-full">
             <EmojiPicker onEmojiClick={onEmojiClick} />
@@ -33,22 +33,12 @@ const ChatInput = () => {
             />
             <AvatarFallback>{getUsernameInitials("Anakin")}</AvatarFallback>
           </Avatar>
-          <div className="relative flex grow flex-col">
+          <div className="group relative flex grow flex-col">
             <div className="self-start text-sm font-medium text-black/60">
               Anakin
             </div>
-            {/* <textarea
-              id="chat"
-              rows={1}
-              maxLength={maxChar}
-              className="peer block max-h-48 w-full resize-none border-none bg-white px-0 pb-0 pt-1 text-sm text-gray-900"
-              placeholder="Your message..."
-              value={message}
-              onChange={(e) => setMessage(e.target.value.slice(0, maxChar))}
-              style={{ boxShadow: "none" }}
-            ></textarea> */}
             <ChatTextArea msg={message} setMsg={setMessage} maxChar={maxChar} />
-            <hr className="w-full border-t transition-all peer-focus:border-blue-500" />
+            <hr className="mt-1 w-full border-t transition-all group-focus-within:border-blue-500" />
           </div>
         </div>
         <div className="mt-3 flex items-center gap-4">

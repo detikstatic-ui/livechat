@@ -1,15 +1,15 @@
 import useStore from "@/context/useStore"
 import DOMPurify from "dompurify"
-import { Check } from "lucide-react"
+import { Ban, Check, Reply } from "lucide-react"
 
 import { cn, getUsernameInitials, replaceUserMentions } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-import ChatAction from "./ChatAction"
 import { Icons } from "./Icons"
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
 
@@ -124,8 +124,16 @@ const ChatMessage = (props: TProps) => {
               <Icons.dots className="pointer-events-none" />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent asChild>
-            <ChatAction />
+          <DropdownMenuContent className="flex flex-col gap-1 rounded-sm border border-black/5 bg-white px-5 py-2.5 text-sm text-gray-500 shadow-md">
+            <DropdownMenuItem className="flex items-center gap-1.5">
+              <Reply strokeWidth={3} className="h-4 w-4" /> Reply
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center gap-1.5">
+              <Icons.flag className="h-3 w-3" /> Laporkan
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex items-center gap-1.5">
+              <Ban className="h-3.5 w-3.5" strokeWidth={3} /> Blokir
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )}
