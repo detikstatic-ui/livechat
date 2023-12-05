@@ -1,17 +1,14 @@
-import { useRef, useState } from "react"
+import { useState } from "react"
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react"
 
-import { useAutosizeTextArea } from "@/lib/hooks"
 import { cn, getUsernameInitials } from "@/lib/utils"
 
+import ChatTextArea from "./ChatTextArea"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 const ChatInput = () => {
   const [showPicker, setShowPicker] = useState(false)
   const [message, setMessage] = useState("")
-  const textAreaRef = useRef<HTMLTextAreaElement>(null)
-
-  useAutosizeTextArea(textAreaRef.current, message)
 
   const onEmojiClick = (clickedEmoji: EmojiClickData) => {
     setMessage((val) => val + clickedEmoji.emoji)
@@ -36,24 +33,21 @@ const ChatInput = () => {
             />
             <AvatarFallback>{getUsernameInitials("Anakin")}</AvatarFallback>
           </Avatar>
-          <div className="relative flex grow flex-col items-center">
-            <label
-              htmlFor="chat"
-              className="self-start text-sm font-medium text-black/60"
-            >
+          <div className="relative flex grow flex-col">
+            <div className="self-start text-sm font-medium text-black/60">
               Anakin
-            </label>
-            <textarea
+            </div>
+            {/* <textarea
               id="chat"
               rows={1}
               maxLength={maxChar}
               className="peer block max-h-48 w-full resize-none border-none bg-white px-0 pb-0 pt-1 text-sm text-gray-900"
               placeholder="Your message..."
-              ref={textAreaRef}
               value={message}
               onChange={(e) => setMessage(e.target.value.slice(0, maxChar))}
               style={{ boxShadow: "none" }}
-            ></textarea>
+            ></textarea> */}
+            <ChatTextArea msg={message} setMsg={setMessage} maxChar={maxChar} />
             <hr className="w-full border-t transition-all peer-focus:border-blue-500" />
           </div>
         </div>

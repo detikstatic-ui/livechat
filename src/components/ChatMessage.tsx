@@ -2,7 +2,7 @@ import useStore from "@/context/useStore"
 import DOMPurify from "dompurify"
 import { Check } from "lucide-react"
 
-import { cn, getUsernameInitials } from "@/lib/utils"
+import { cn, getUsernameInitials, replaceUserMentions } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import ChatAction from "./ChatAction"
@@ -45,8 +45,25 @@ const ChatMessage = (props: TProps) => {
     children,
   } = props
 
+  // const DOMPurifyHTML = {
+  //   __html: DOMPurify.sanitize(message, { USE_PROFILES: { html: true } }),
+  // }
+  // const sanitizedHTML = replaceUserMentions(DOMPurifyHTML.__html)
+
+  function getSanitizedHTML(input: string): string {
+    try {
+      const sanitizedInput = DOMPurify.sanitize(input, {
+        USE_PROFILES: { html: true },
+      })
+      return replaceUserMentions(sanitizedInput)
+    } catch (error) {
+      // Handle error, log it, or return a default value
+      console.error("Sanitization error:", error)
+      return "" // You might want to return a default value or the original input
+    }
+  }
   const sanitizedHTML = {
-    __html: DOMPurify.sanitize(message, { USE_PROFILES: { html: true } }),
+    __html: getSanitizedHTML(message),
   }
 
   return (

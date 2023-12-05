@@ -162,8 +162,8 @@ const ChatArea = () => {
           <ChatSwiper />
         </ChatMessage>
         <ChatMessage
-          userName="Luke Skywalker"
-          message={`lorem ipsum dolor sit amet consectetur adipisicing elit.`}
+          userName="Darth Vader"
+          message={`@[Luke Skywalker](luke_skywalker), I AM YOUR FATHER!`}
           time="12:48"
           avatar="/images/luke.jpeg"
           isAdmin={true}

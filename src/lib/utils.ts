@@ -14,3 +14,8 @@ export const getUsernameInitials = (username: string): string => {
 
   return initials
 }
+
+export const replaceUserMentions = (input: string): string => {
+  const regex = /@\[([^\]]+)\]\(([^)]+)\)/g
+  return input.replace(regex, '<span class="user-mention">@$2</span>')
+}

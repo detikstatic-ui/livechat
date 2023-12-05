@@ -73,4 +73,20 @@
 }
 
 @layer components {
+  .user-mention {
+    @apply font-bold bg-[#cee4e5];
+  }
+}
+
+.mentions {
+  @apply mt-1;
+}
+
+.mentions__input {
+  @apply focus:outline-none focus:ring-0;
+}
+.mentions__highlighter,
+.mentions__input {
+  @apply break-words;
+  word-break: break-word;
 }
