@@ -105,12 +105,14 @@ const ChatMessage = (props: TProps) => {
           className={cn("inline text-stone-950 [&>a]:underline", msgClassName)}
           dangerouslySetInnerHTML={sanitizedHTML}
         />
-        <div
-          className="grid w-full min-w-0 grid-cols-1"
-          style={{ margin: "8px 0 0" }}
-        >
-          {children}
-        </div>
+        {children && (
+          <div
+            className="grid w-full min-w-0 grid-cols-1"
+            style={{ margin: "8px 0 0" }}
+          >
+            {children}
+          </div>
+        )}
       </div>
       {hasAction && (
         <DropdownMenu>
