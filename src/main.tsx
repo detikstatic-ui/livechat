@@ -17,6 +17,10 @@ const router = createBrowserRouter(
           index: true,
           element: <Home />,
         },
+        {
+          path: "onboarding",
+          element: <Home onboarding={true} />,
+        },
       ],
     },
     {

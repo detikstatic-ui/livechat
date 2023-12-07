@@ -8,8 +8,15 @@ import ChatNetworkStatus from "@/components/ChatNetworkStatus"
 import ChatPinned from "@/components/ChatPinned"
 import ChatUsers from "@/components/ChatUsers"
 import HideChat from "@/components/HideChat"
+import OnBoarding from "@/components/OnBoarding"
 
-const Home = () => {
+type HomeProps = {
+  onboarding?: boolean
+}
+
+const Home = (props: HomeProps) => {
+  const { onboarding = false } = props
+
   const [isChatHidden, setIsChatHidden] = useState(false)
   const [showUsers, setShowUsers] = useState(false)
 
@@ -31,6 +38,7 @@ const Home = () => {
         <ChatInput />
       </div>
       <HideChat isChatHidden={isChatHidden} setIsChatHidden={setIsChatHidden} />
+      {onboarding && <OnBoarding />}
     </>
   )
 }
