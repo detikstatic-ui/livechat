@@ -11,11 +11,15 @@ import {
 
 import { Button } from "./ui/button"
 
-const OnBoarding = () => {
+type TProps = {
+  modalOpen?: boolean
+}
+
+const Modal = ({ modalOpen = false }: TProps) => {
   const [isShow, setIsShow] = useState(false)
 
   return (
-    <Dialog defaultOpen>
+    <Dialog open={modalOpen}>
       <DialogContent className="max-w-xs rounded-md outline-none sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-left">Selamat Datang</DialogTitle>
@@ -57,4 +61,4 @@ const OnBoarding = () => {
     </Dialog>
   )
 }
-export default OnBoarding
+export default Modal

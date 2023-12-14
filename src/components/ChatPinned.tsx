@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Ban, Pin, XCircle } from "lucide-react"
+import { Pin, XCircle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -15,16 +15,21 @@ import {
 
 type TProps = {
   className?: string
+  isShowing?: boolean
 }
 
-const ChatPinned = ({ className }: TProps) => {
+const ChatPinned = ({ className, isShowing = true }: TProps) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
-  const [isShow, setIsShow] = useState<boolean>(true)
+  const [isShow, setIsShow] = useState<boolean>(isShowing)
+
+  if (!isShow) {
+    return null
+  }
+
   return (
     <div
       className={cn(
-        "relative flex cursor-pointer flex-col gap-2 bg-[#203d6b] p-2.5 text-white",
-        isShow ? "" : "hidden",
+        "absolute inset-x-2 top-1.5 z-10 flex cursor-pointer flex-col gap-2 rounded bg-livechat-blue p-2.5 text-white transition-all",
         className
       )}
       onClick={() => setIsExpanded(!isExpanded)}
@@ -40,16 +45,17 @@ const ChatPinned = ({ className }: TProps) => {
       )}
       <ChatMessage
         className="py-0 pl-0 pr-6"
-        msgClassName="text-white line-clamp-1"
+        msgClassName={cn("text-white")}
         timeClassName="text-gray-400"
-        contentClassName={isExpanded ? "line-clamp-none" : "line-clamp-1"}
+        contentClassName={cn(isExpanded ? "line-clamp-none" : "line-clamp-1")}
         time="9:26 AM"
-        userName="Master Yoda"
-        avatar="/images/yoda.jpeg"
+        userName="detikTV"
+        avatar="https://cdn.detik.net.id/20detik3/images/detiktv.jpg?v=2023121412197"
         message="Fear is the path to the dark side. Fear leads to anger; anger leads to
-          hate; hate leads to suffering."
+          hate; hate leads to suffering. Patience you must have, my young Padawan."
         hasAction={false}
         isAdmin={true}
+        role="admin"
       />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -62,33 +68,33 @@ const ChatPinned = ({ className }: TProps) => {
             <Icons.dotsBold className="pointer-events-none" />
           </button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent align="end">
           <DropdownMenuItem asChild>
             <button
               type="button"
-              className="flex w-full cursor-pointer gap-2.5"
+              className="flex w-full cursor-pointer gap-2.5 font-medium"
             >
-              <Icons.flag className="h-3 w-3" />
-              Report
+              <Icons.flag />
+              Laporkan
             </button>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <button
               type="button"
-              className="flex w-full cursor-pointer gap-2.5"
+              className="flex w-full cursor-pointer gap-2.5 font-medium"
             >
-              <Ban className="h-3.5 w-3.5" strokeWidth={3} />
-              Block
+              <Icons.ban />
+              Blokir
             </button>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
             <button
               type="button"
-              className="flex w-full cursor-pointer gap-2.5"
+              className="flex w-full cursor-pointer gap-2.5 font-medium"
               onClick={() => setIsShow(!isShow)}
             >
-              <XCircle className="h-4 w-4" /> Dismiss pinned message
+              <XCircle className="h-5 w-5" /> Tutup pesan
             </button>
           </DropdownMenuItem>
         </DropdownMenuContent>

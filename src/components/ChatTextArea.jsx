@@ -88,28 +88,41 @@ const ChatTextArea = ({ msg, setMsg, maxChar = 200 }) => {
         scrollHeight + "px"
     }
   }, [msg])
+
   return (
-    <MentionsInput
-      placeholder="Add Chat... Use '@' for mention."
-      className="mentions"
-      inputRef={textAreaRef}
-      style={mentionStyle}
-      value={msg}
-      onChange={(e) => setMsg(e.target.value.slice(0, maxChar))}
-      a11ySuggestionsListLabel={"Suggested mentions"}
-      allowSuggestionsAboveCursor={true}
-    >
-      <Mention
-        data={users}
-        markup="@[__display__](__id__)"
-        displayTransform={(id) => `@${id}`}
-        renderSuggestion={(suggestion, search, highlightedDisplay) => (
-          <div className="user">{highlightedDisplay}</div>
-        )}
-        appendSpaceOnAdd={true}
-        className="bg-[#cee4e5]"
-      />
-    </MentionsInput>
+    <>
+      {/* <button
+        type="button"
+        onClick={() =>
+          setMsg(
+            (currentMsg) => currentMsg + "@[Obi-Wan Kenobi](obi-wan_kenobi) "
+          )
+        }
+      >
+        test
+      </button> */}
+      <MentionsInput
+        placeholder="Chat di sini... Gunakan '@' untuk mention."
+        className="mentions"
+        inputRef={textAreaRef}
+        style={mentionStyle}
+        value={msg}
+        onChange={(e) => setMsg(e.target.value.slice(0, maxChar))}
+        a11ySuggestionsListLabel={"Suggested mentions"}
+        allowSuggestionsAboveCursor={true}
+      >
+        <Mention
+          data={users}
+          markup="@[__display__](__id__)"
+          displayTransform={(id) => `@${id}`}
+          renderSuggestion={(suggestion, search, highlightedDisplay) => (
+            <div className="user">{highlightedDisplay}</div>
+          )}
+          appendSpaceOnAdd={true}
+          className="bg-[#cee4e5]"
+        />
+      </MentionsInput>
+    </>
   )
 }
 

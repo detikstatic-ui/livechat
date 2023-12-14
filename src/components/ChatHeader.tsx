@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Switch } from "@/components/ui/switch"
+import HideChat from "@/components/HideChat"
 
 import { Icons } from "./Icons"
 import {
@@ -19,51 +20,80 @@ type TProps = {
 }
 
 const ChatHeader = (props: TProps) => {
-  const { show: showTime, toggle: timeToogle } = useStore()
+  const {
+    show: showTime,
+    toggle: timeToogle,
+    chatShow,
+    toggleChat,
+  } = useStore()
   const { showUsers, setShowUsers } = props
 
   return (
-    <div className="z-20 flex shrink-0 items-center border-b border-neutral-200 bg-white px-2.5 py-2">
+    <div className="z-20 flex shrink-0 items-center gap-2.5 border-b border-neutral-200 bg-white p-4">
       {!showUsers ? (
         <>
-          <div className="flex items-center gap-1 text-xs font-semibold text-stone-950">
-            <Icons.users className="h-4 w-4" />
-            {participants.length} Online
-            <span className="block h-1.5 w-1.5 animate-pulse rounded-full bg-green-500"></span>
-          </div>
+          <h1 className="text-base font-semibold text-black-light1">
+            Live Chat
+          </h1>
+          <button
+            type="button"
+            onClick={() => setShowUsers(!showUsers)}
+            className="ml-auto grid h-6 w-6 place-content-center items-center gap-1 rounded-sm text-xs font-semibold text-stone-950 hover:bg-black/10 focus-visible:outline-black/10"
+          >
+            <Icons.users className="h-5 w-5" />
+          </button>
+          <HideChat />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
                 className={cn(
-                  "ml-auto grid h-7 w-7 place-content-center rounded-full transition-colors duration-300 hover:bg-black/10 focus-visible:outline-black/10"
+                  " grid h-7 w-7 place-content-center rounded-full transition-colors duration-300 hover:bg-black/10 focus-visible:outline-black/10"
                 )}
               >
                 <Icons.dotsBold className="pointer-events-none" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuItem asChild>
-                <button
-                  type="button"
-                  className="flex w-full cursor-pointer items-center gap-2"
-                  onClick={() => setShowUsers(!showUsers)}
-                >
-                  <Icons.user className="h-5 w-5" />
-                  Participants
-                </button>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={timeToogle} asChild>
+              {chatShow && (
+                <>
+                  <DropdownMenuItem asChild>
+                    <button
+                      type="button"
+                      className="flex w-full cursor-pointer items-center gap-2"
+                      onClick={() => setShowUsers(!showUsers)}
+                    >
+                      <Icons.user className="h-5 w-5" />
+                      Participants
+                    </button>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={timeToogle} asChild>
+                    <div className="flex w-full cursor-pointer items-center gap-2">
+                      <Icons.time className="h-5 w-5" />
+                      <label
+                        htmlFor="timestamps"
+                        className="pointer-events-none"
+                      >
+                        Timestamps
+                      </label>
+                      <Switch
+                        id="timestamps"
+                        className="pointer-events-none shrink-0"
+                        checked={showTime}
+                      />
+                    </div>
+                  </DropdownMenuItem>
+                </>
+              )}
+              <DropdownMenuItem onClick={toggleChat} asChild>
                 <div className="flex w-full cursor-pointer items-center gap-2">
-                  <Icons.time className="h-5 w-5" />
-                  <label htmlFor="timestamps" className="pointer-events-none">
-                    Timestamps
-                  </label>
-                  <Switch
-                    id="timestamps"
-                    className="pointer-events-none shrink-0"
-                    checked={showTime}
+                  <Icons.collapse
+                    className={cn(
+                      "h-5 w-5 transition-all",
+                      !chatShow && "rotate-180"
+                    )}
                   />
+                  {!chatShow ? "Show Chat" : "Hide Chat"}
                 </div>
               </DropdownMenuItem>
             </DropdownMenuContent>

@@ -1,17 +1,11 @@
 import useStore from "@/context/useStore"
 import DOMPurify from "dompurify"
-import { Ban, Check, Reply } from "lucide-react"
+import { Check } from "lucide-react"
 
 import { cn, getUsernameInitials, replaceUserMentions } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { Icons } from "./Icons"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu"
 
 type TProps = {
   avatar?: string
@@ -26,6 +20,7 @@ type TProps = {
   contentClassName?: string
   hasAction?: boolean
   children?: React.ReactNode
+  role?: "user" | "admin" | "moderator"
 }
 
 const ChatMessage = (props: TProps) => {
@@ -37,6 +32,7 @@ const ChatMessage = (props: TProps) => {
     userName = "Obi-Wan Kenobi",
     time = "12:45",
     isAdmin = false,
+    role = "user",
     className,
     timeClassName,
     msgClassName,
@@ -44,11 +40,6 @@ const ChatMessage = (props: TProps) => {
     hasAction = true,
     children,
   } = props
-
-  // const DOMPurifyHTML = {
-  //   __html: DOMPurify.sanitize(message, { USE_PROFILES: { html: true } }),
-  // }
-  // const sanitizedHTML = replaceUserMentions(DOMPurifyHTML.__html)
 
   function getSanitizedHTML(input: string): string {
     try {
@@ -95,11 +86,18 @@ const ChatMessage = (props: TProps) => {
         )}
         <span
           className={cn(
-            "inline font-semibold text-neutral-900",
+            "inline-flex items-center gap-1 font-semibold text-neutral-900",
             isAdmin ? "rounded-sm bg-yellow-400 px-1 py-0.5" : ""
           )}
         >
-          {userName} {isAdmin ? <Check className="inline w-4" /> : ""}
+          {userName}
+          {role === "admin" ? (
+            <Icons.admin />
+          ) : role === "moderator" ? (
+            <Check className="inline w-4" />
+          ) : (
+            ""
+          )}
         </span>
         <p
           className={cn("inline text-stone-950 [&>a]:underline", msgClassName)}
@@ -115,29 +113,13 @@ const ChatMessage = (props: TProps) => {
         )}
       </div>
       {hasAction && (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button
-              className={cn(
-                "absolute right-2 top-0.5 shrink-0 rounded-full p-1 outline outline-1 outline-transparent transition-all duration-300 hover:outline-black/20 "
-              )}
-              type="button"
-            >
-              <Icons.dots className="pointer-events-none" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="flex flex-col gap-1 rounded-sm border border-black/5 bg-white px-5 py-2.5 text-sm text-gray-500 shadow-md">
-            <DropdownMenuItem className="flex items-center gap-1.5">
-              <Reply strokeWidth={3} className="h-4 w-4" /> Reply
-            </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-1.5">
-              <Icons.flag className="h-3 w-3" /> Laporkan
-            </DropdownMenuItem>
-            <DropdownMenuItem className="flex items-center gap-1.5">
-              <Ban className="h-3.5 w-3.5" strokeWidth={3} /> Blokir
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div
+          className={cn(
+            "absolute right-2 top-0.5 shrink-0 rounded-full p-1 text-transparent outline outline-1 outline-transparent transition-all duration-300 group-hover:text-inherit"
+          )}
+        >
+          <Icons.dots className="pointer-events-none" />
+        </div>
       )}
     </div>
   )

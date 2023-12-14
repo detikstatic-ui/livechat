@@ -1,9 +1,11 @@
 import { useState } from "react"
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react"
+import { SendHorizontal } from "lucide-react"
 
 import { cn, getUsernameInitials } from "@/lib/utils"
 
 import ChatTextArea from "./ChatTextArea"
+import { Icons } from "./Icons"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 const ChatInput = () => {
@@ -47,21 +49,7 @@ const ChatInput = () => {
             className="cursor-pointer rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
             onClick={() => setShowPicker((val) => !val)}
           >
-            <svg
-              className="h-5 w-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13.408 7.5h.01m-6.876 0h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM4.6 11a5.5 5.5 0 0 0 10.81 0H4.6Z"
-              />
-            </svg>
+            <Icons.emoji className="h-6 w-6" />
             <span className="sr-only">Add emoji</span>
           </button>
           <p className="ml-auto text-xs tracking-wide text-gray-500">
@@ -69,17 +57,9 @@ const ChatInput = () => {
           </p>
           <button
             type="submit"
-            className="flex cursor-pointer justify-center rounded-full text-blue-600 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+            className="flex cursor-pointer justify-center rounded-full text-black-light3 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
           >
-            <svg
-              className="h-5 w-5 rotate-90 text-inherit rtl:-rotate-90"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 18 20"
-            >
-              <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
-            </svg>
+            <SendHorizontal className="h-5 w-5" />
             <span className="sr-only">Send message</span>
           </button>
         </div>

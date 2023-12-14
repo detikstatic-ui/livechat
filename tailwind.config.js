@@ -47,6 +47,9 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        livechat: {
+          blue: "#21409A",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

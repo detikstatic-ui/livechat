@@ -1,23 +1,19 @@
+import useStore from "@/context/useStore"
 import { ChevronUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-interface Props {
-  setIsChatHidden: (isChatHidden: boolean) => void
-  isChatHidden: boolean
-}
+const HideChat = () => {
+  const { chatShow, toggleChat } = useStore()
 
-const HideChat = (props: Props) => {
-  const { isChatHidden, setIsChatHidden } = props
   return (
     <button
       type="button"
-      className="flex items-center justify-center gap-1 border-t border-neutral-200 bg-stone-50 px-2.5 py-1 text-center text-xxs text-neutral-500"
-      onClick={() => setIsChatHidden(!isChatHidden)}
+      className="grid h-6 w-6 place-content-center rounded-sm hover:bg-black/10 focus-visible:outline-black/10"
+      onClick={toggleChat}
     >
-      {isChatHidden ? "TAMPILKAN CHAT" : "SEMBUNYIKAN CHAT"}
       <ChevronUp
-        className={cn("w-4 transition-all", isChatHidden && "rotate-180")}
+        className={cn("w-5 rotate-180 transition-all", chatShow && "rotate-0")}
       />
     </button>
   )
