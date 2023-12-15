@@ -1,4 +1,5 @@
 import { useState } from "react"
+import useStore from "@/context/useStore"
 import EmojiPicker, { EmojiClickData } from "emoji-picker-react"
 import { SendHorizontal } from "lucide-react"
 
@@ -10,14 +11,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 const ChatInput = () => {
   const [showPicker, setShowPicker] = useState(false)
-  const [message, setMessage] = useState("")
+  const { message, setMessage, maxMessageLength: maxChar } = useStore()
 
   const onEmojiClick = (clickedEmoji: EmojiClickData) => {
-    setMessage((val) => val + clickedEmoji.emoji)
+    setMessage(message + clickedEmoji.emoji)
     setShowPicker(false)
   }
-
-  const maxChar = 200
 
   return (
     <>
@@ -39,7 +38,7 @@ const ChatInput = () => {
             <div className="self-start text-sm font-medium text-black/60">
               Anakin
             </div>
-            <ChatTextArea msg={message} setMsg={setMessage} maxChar={maxChar} />
+            <ChatTextArea msg={message} setMsg={setMessage} />
             <hr className="mt-1 w-full border-t transition-all group-focus-within:border-blue-500" />
           </div>
         </div>

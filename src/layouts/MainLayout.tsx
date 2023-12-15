@@ -9,7 +9,7 @@ import { ThemeProvider } from "../context/ThemeProvider"
 
 function MainLayout() {
   return (
-    <ThemeProvider defaultTheme="system" storageKey="theme">
+    <ThemeProvider defaultTheme="light" storageKey="theme">
       <div className="flex h-screen flex-col">
         <Outlet />
       </div>

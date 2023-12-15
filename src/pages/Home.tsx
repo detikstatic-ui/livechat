@@ -5,17 +5,20 @@ import { cn } from "@/lib/utils"
 import ChatArea from "@/components/ChatArea"
 import ChatHeader from "@/components/ChatHeader"
 import ChatInput from "@/components/ChatInput"
+import ChatLogin from "@/components/ChatLogin"
 import ChatNetworkStatus from "@/components/ChatNetworkStatus"
 import ChatPinned from "@/components/ChatPinned"
 import ChatUsers from "@/components/ChatUsers"
+import ClosedChat from "@/components/ClosedChat"
 import OnBoarding from "@/components/OnBoarding"
+import RestrictedDialog from "@/components/RestrictedDialog"
 
 type HomeProps = {
-  onboarding?: boolean
+  status?: "default" | "onboarding" | "restricted" | "closed" | "logout"
 }
 
 const Home = (props: HomeProps) => {
-  const { onboarding = false } = props
+  const { status = "default" } = props
 
   const [showUsers, setShowUsers] = useState(false)
   const { chatShow } = useStore()
@@ -33,16 +36,25 @@ const Home = (props: HomeProps) => {
             !chatShow && "h-0"
           )}
         >
-          <div className="relative isolate z-0 flex h-full min-h-0 flex-col overflow-hidden">
-            <ChatPinned />
-            <ChatArea />
-            {showUsers && <ChatUsers />}
-            <ChatNetworkStatus />
-          </div>
-          <ChatInput />
+          {status !== "closed" ? (
+            <>
+              <div className="relative isolate z-0 flex h-full min-h-0 flex-col overflow-hidden">
+                <ChatPinned />
+                <ChatArea />
+                {showUsers && <ChatUsers />}
+                {status === "default" && <ChatNetworkStatus />}
+              </div>
+              {status === "logout" ? <ChatLogin /> : <ChatInput />}
+            </>
+          ) : (
+            <>
+              <ClosedChat />
+            </>
+          )}
         </div>
       </div>
-      {onboarding && <OnBoarding />}
+      {status === "onboarding" && <OnBoarding />}
+      {status === "restricted" && <RestrictedDialog modalOpen={true} />}
     </>
   )
 }

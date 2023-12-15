@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react"
 import { participants } from "@/data/const"
 import { Mention, MentionsInput } from "react-mentions"
 
-const ChatTextArea = ({ msg, setMsg, maxChar = 200 }) => {
+const ChatTextArea = ({ msg, setMsg }) => {
   const textAreaRef = useRef(null)
 
   const mentionStyle = {
@@ -107,14 +107,14 @@ const ChatTextArea = ({ msg, setMsg, maxChar = 200 }) => {
         inputRef={textAreaRef}
         style={mentionStyle}
         value={msg}
-        onChange={(e) => setMsg(e.target.value.slice(0, maxChar))}
+        onChange={(e) => setMsg(e.target.value)}
         a11ySuggestionsListLabel={"Suggested mentions"}
         allowSuggestionsAboveCursor={true}
       >
         <Mention
           data={users}
           markup="@[__display__](__id__)"
-          displayTransform={(id) => `@${id}`}
+          displayTransform={(id, display) => `@${display}`}
           renderSuggestion={(suggestion, search, highlightedDisplay) => (
             <div className="user">{highlightedDisplay}</div>
           )}

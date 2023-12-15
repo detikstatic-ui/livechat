@@ -11,7 +11,7 @@ type TProps = {
   avatar?: string
   message?: string
   isRight?: boolean
-  userName?: string
+  name?: string
   time?: string
   isAdmin?: boolean
   className?: string
@@ -29,7 +29,7 @@ const ChatMessage = (props: TProps) => {
     avatar = "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
     message = "You were the Chosen One!",
     isRight = false,
-    userName = "Obi-Wan Kenobi",
+    name = "Obi-Wan Kenobi",
     time = "12:45",
     isAdmin = false,
     role = "user",
@@ -67,7 +67,7 @@ const ChatMessage = (props: TProps) => {
     >
       <Avatar className={cn(`relative flex h-6 w-6`)}>
         <AvatarImage src={avatar} className="object-cover" />
-        <AvatarFallback>{getUsernameInitials(userName)}</AvatarFallback>
+        <AvatarFallback>{getUsernameInitials(name)}</AvatarFallback>
       </Avatar>
       <div
         className={cn(
@@ -90,11 +90,11 @@ const ChatMessage = (props: TProps) => {
             isAdmin ? "rounded-sm bg-yellow-400 px-1 py-0.5" : ""
           )}
         >
-          {userName}
+          {name}
           {role === "admin" ? (
-            <Icons.admin />
+            <Icons.admin className="h-4 w-4" />
           ) : role === "moderator" ? (
-            <Check className="inline w-4" />
+            <Check className="inline h-4 w-4" />
           ) : (
             ""
           )}

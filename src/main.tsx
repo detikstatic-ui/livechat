@@ -1,8 +1,8 @@
 import React from "react"
 import MainLayout from "@/layouts/MainLayout"
-import TestLayout from "@/layouts/TestLayout"
 import Error from "@/pages/Error"
 import Home from "@/pages/Home"
+import IndeksPageDesign from "@/pages/IndeksPageDesign"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 
@@ -18,14 +18,26 @@ const router = createBrowserRouter(
           element: <Home />,
         },
         {
-          path: "onboarding",
-          element: <Home onboarding={true} />,
+          path: "welcome",
+          element: <Home status={"onboarding"} />,
+        },
+        {
+          path: "logout",
+          element: <Home status={"logout"} />,
+        },
+        {
+          path: "restricted",
+          element: <Home status={"restricted"} />,
+        },
+        {
+          path: "closed",
+          element: <Home status={"closed"} />,
+        },
+        {
+          path: "indeks-page-design",
+          element: <IndeksPageDesign />,
         },
       ],
-    },
-    {
-      path: "/test",
-      element: <TestLayout />,
     },
   ],
   { basename: import.meta.env.DEV ? "/" : import.meta.env.BASE_URL }

@@ -49,7 +49,7 @@ const ChatPinned = ({ className, isShowing = true }: TProps) => {
         timeClassName="text-gray-400"
         contentClassName={cn(isExpanded ? "line-clamp-none" : "line-clamp-1")}
         time="9:26 AM"
-        userName="detikTV"
+        name="detikTV"
         avatar="https://cdn.detik.net.id/20detik3/images/detiktv.jpg?v=2023121412197"
         message="Fear is the path to the dark side. Fear leads to anger; anger leads to
           hate; hate leads to suffering. Patience you must have, my young Padawan."

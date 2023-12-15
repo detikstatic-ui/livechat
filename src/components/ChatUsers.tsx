@@ -2,28 +2,28 @@ import { participants } from "@/data/const"
 
 import { cn, getUsernameInitials } from "@/lib/utils"
 
-import { Icons } from "./Icons"
+// import { Icons } from "./Icons"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { ScrollArea } from "./ui/scroll-area"
 
-const adminUsers = [
-  {
-    name: "Luke Skywalker",
-    avatar: "/images/luke.jpeg",
-    role: "moderator",
-  },
-  {
-    name: "Princess Leia",
-    avatar: "/images/leia.jpeg",
-    role: "verified",
-  },
-]
+// const adminUsers = [
+//   {
+//     name: "Luke Skywalker",
+//     avatar: "/images/luke.jpeg",
+//     role: "moderator",
+//   },
+//   {
+//     name: "Princess Leia",
+//     avatar: "/images/leia.jpeg",
+//     role: "verified",
+//   },
+// ]
 
 const ChatUsers = () => {
   return (
     <div className="absolute inset-0 z-10 bg-white">
       <ScrollArea className="h-full w-full">
-        <ul className="flex flex-col gap-2 border-b p-2.5">
+        {/* <ul className="flex flex-col gap-2 border-b p-2.5">
           {adminUsers.map((user, i) => (
             <li key={i} className="flex items-center gap-2 text-sm">
               <Avatar className={cn(`h-8 w-8 rounded-full`)}>
@@ -47,7 +47,7 @@ const ChatUsers = () => {
               </span>
             </li>
           ))}
-        </ul>
+        </ul> */}
         <ul className="flex flex-col gap-2 p-2.5">
           {participants.map((user, i) => (
             <li key={i} className="flex items-center gap-2 text-sm">
@@ -57,7 +57,7 @@ const ChatUsers = () => {
                   {getUsernameInitials(user.name)}
                 </AvatarFallback>
               </Avatar>
-              <span className="text-gray-500">{user.name}</span>
+              <span className="font-semibold text-gray-500">{user.name}</span>
             </li>
           ))}
         </ul>

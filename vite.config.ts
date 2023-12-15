@@ -13,6 +13,9 @@ export default defineConfig(({ command }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
+    build: {
+      chunkSizeWarningLimit: 2000,
+    },
   }
 
   // if (command !== "serve") {
