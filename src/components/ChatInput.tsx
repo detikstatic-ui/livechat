@@ -56,7 +56,7 @@ const ChatInput = () => {
           </p>
           <button
             type="submit"
-            className="flex cursor-pointer justify-center rounded-full text-black-light3 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+            className="flex cursor-pointer justify-center rounded-full text-black-light3 transition-colors hover:text-black dark:text-blue-500 dark:hover:bg-gray-600"
           >
             <SendHorizontal className="h-5 w-5" />
             <span className="sr-only">Send message</span>

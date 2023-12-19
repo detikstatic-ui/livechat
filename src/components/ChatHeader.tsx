@@ -100,14 +100,14 @@ const ChatHeader = (props: TProps) => {
           </DropdownMenu>
         </>
       ) : (
-        <div className="flex w-full items-center justify-between py-0.5 text-xs font-semibold text-stone-950">
+        <div className="flex w-full items-center justify-between text-base font-semibold text-black-light1">
           <button
             className="flex items-center gap-2"
             type="button"
             onClick={() => setShowUsers(!showUsers)}
           >
-            <span className="grid h-6 w-6 place-content-center rounded-full bg-stone-950">
-              <ArrowLeft className="h-4 w-4 text-white" />
+            <span className="grid h-6 w-6 place-content-center rounded-full transition-all duration-200 hover:bg-stone-950 hover:text-white">
+              <ArrowLeft className="h-5 w-5" />
             </span>
             Participants
           </button>
