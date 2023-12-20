@@ -21,7 +21,8 @@ const Home = (props: HomeProps) => {
   const { status = "default" } = props
 
   const [showUsers, setShowUsers] = useState(false)
-  const { chatShow } = useStore()
+  const chatShow = useStore((state) => state.chatShow)
+  // const { chatShow } = useStore()
   return (
     <>
       <div

@@ -24,7 +24,8 @@ type TProps = {
 }
 
 const ChatMessage = (props: TProps) => {
-  const { show: showTime } = useStore()
+  const showTime = useStore((state) => state.show)
+  // const { show: showTime } = useStore()
   const {
     avatar = "https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg",
     message = "You were the Chosen One!",

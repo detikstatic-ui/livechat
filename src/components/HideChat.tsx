@@ -4,7 +4,9 @@ import { ChevronUp } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const HideChat = () => {
-  const { chatShow, toggleChat } = useStore()
+  const chatShow = useStore((state) => state.chatShow)
+  const toggleChat = useStore((state) => state.toggleChat)
+  // const { chatShow, toggleChat } = useStore()
 
   return (
     <button

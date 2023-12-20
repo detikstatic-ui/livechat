@@ -20,12 +20,11 @@ type TProps = {
 }
 
 const ChatHeader = (props: TProps) => {
-  const {
-    show: showTime,
-    toggle: timeToogle,
-    chatShow,
-    toggleChat,
-  } = useStore()
+  const showTime = useStore((state) => state.show)
+  const timeToogle = useStore((state) => state.toggle)
+  const chatShow = useStore((state) => state.chatShow)
+  const toggleChat = useStore((state) => state.toggleChat)
+
   const { showUsers, setShowUsers } = props
 
   return (

@@ -11,7 +11,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 
 const ChatInput = () => {
   const [showPicker, setShowPicker] = useState(false)
-  const { message, setMessage, maxMessageLength: maxChar } = useStore()
+  const message = useStore((state) => state.message)
+  const setMessage = useStore((state) => state.setMessage)
+  const maxChar = useStore((state) => state.maxMessageLength)
+  // const { message, setMessage, maxMessageLength: maxChar } = useStore()
 
   const onEmojiClick = (clickedEmoji: EmojiClickData) => {
     setMessage(message + clickedEmoji.emoji)
