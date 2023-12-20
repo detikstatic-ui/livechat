@@ -9,7 +9,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
+  // DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
 
@@ -54,7 +54,6 @@ const ChatPinned = ({ className, isShowing = true }: TProps) => {
         message="Fear is the path to the dark side. Fear leads to anger; anger leads to
           hate; hate leads to suffering. Patience you must have, my young Padawan."
         hasAction={false}
-        isAdmin={true}
         role="admin"
       />
       <DropdownMenu>
@@ -69,7 +68,7 @@ const ChatPinned = ({ className, isShowing = true }: TProps) => {
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem asChild>
+          {/* <DropdownMenuItem asChild>
             <button
               type="button"
               className="flex w-full cursor-pointer gap-2.5 font-medium"
@@ -87,7 +86,7 @@ const ChatPinned = ({ className, isShowing = true }: TProps) => {
               Blokir
             </button>
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
+          <DropdownMenuSeparator /> */}
           <DropdownMenuItem asChild>
             <button
               type="button"

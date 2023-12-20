@@ -88,8 +88,8 @@ const ChatMessage = (props: TProps) => {
         <span
           className={cn(
             "inline-flex items-center gap-1 font-semibold text-inherit",
-            isAdmin ? "rounded-sm bg-yellow-400 px-1 py-0.5 text-gray-900" : ""
-            // isAdmin ? "rounded-sm px-1 py-0.5 text-livechat-blue" : ""
+            // isAdmin ? "rounded-sm bg-yellow-400 px-1 py-0.5 text-gray-900" : ""
+            isAdmin ? "rounded-sm py-0.5 pl-1 text-livechat-blue" : ""
           )}
         >
           {name}

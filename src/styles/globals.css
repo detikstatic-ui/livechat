@@ -89,7 +89,7 @@
 
 @layer components {
   .user-mention {
-    @apply font-bold bg-[#cee4e5];
+    @apply font-bold;
   }
 }
 
