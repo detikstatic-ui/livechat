@@ -27,7 +27,7 @@ const Home = (props: HomeProps) => {
     <>
       <div
         className={cn(
-          "isolate mx-auto flex h-full max-w-lg flex-col overflow-hidden rounded border border-neutral-200 "
+          "isolate mx-auto flex h-full min-w-[360px] max-w-lg flex-col overflow-hidden rounded border border-neutral-200 "
         )}
       >
         <ChatHeader showUsers={showUsers} setShowUsers={setShowUsers} />
